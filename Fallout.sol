@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 
-import "openzeppelin-contracts-06/math/SafeMath.sol"; //optdated. Must be replaced with Math.sol
+import "openzeppelin-contracts-06/math/SafeMath.sol"; //OUTdated. Must be replaced with Math.sol
 
 contract Fallout {
     using SafeMath for uint256;
@@ -10,7 +10,7 @@ contract Fallout {
     address payable public owner;
 
     /* constructor */
-    function Fal1out() public payable {  //outdated. Now constructor is defined by the constructor() keyword
+    function Fal1out() public payable {  //OUTdated. Now constructor is defined by the constructor() keyword
         owner = msg.sender;
         allocations[owner] = msg.value;
     }
@@ -39,6 +39,7 @@ contract Fallout {
     the contract (`address(this).balance`) and transfer it to their address. 
     This is restricted to the `owner` using the `onlyOwner` modifier.*/
     function collectAllocations() public onlyOwner {
+        // Allow owner to withdraw all accumulated balances from users.
         msg.sender.transfer(address(this).balance);
     }
 
