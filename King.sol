@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
-// Specifies the license under which the code is released (MIT License in this case).
 
 pragma solidity ^0.8.0;
-// Specifies the version of Solidity compiler to be used (0.8.0 or higher).
 
 contract King {
     // Declares a new contract named "King".
