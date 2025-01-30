@@ -54,25 +54,21 @@ contract Reentrance {
 }
 
 --------------updated version
-
 // SPDX-License-Identifier: MIT
-// Specifies the license under which the code is released (MIT License in this case).
 
 pragma solidity ^0.8.20;
-// Specifies the version of the Solidity compiler to be used (0.8.20 or higher).
 
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 // Imports the ReentrancyGuard contract from OpenZeppelin 5.0 to prevent reentrancy attacks.
 
 contract Reentrance is ReentrancyGuard {
-    // Declares a new contract named "Reentrance" and inherits from ReentrancyGuard.
-
+ 
     mapping(address => uint256) public balances;
     // A public mapping to store the Ether balances of addresses.
-
+    
+     /*A payable function that allows users to donate Ether to a specific address.
+        The `payable` keyword allows the function to receive Ether.*/
     function donate(address _to) public payable {
-        // A payable function that allows users to donate Ether to a specific address.
-        // The `payable` keyword allows the function to receive Ether.
 
         balances[_to] += msg.value;
         // Adds the sent Ether (`msg.value`) to the balance of the specified address (`_to`).
@@ -80,19 +76,15 @@ contract Reentrance is ReentrancyGuard {
     }
 
     function balanceOf(address _who) public view returns (uint256 balance) {
-        // A view function to check the balance of a specific address.
-        // The `view` keyword indicates that this function does not modify the state.
-
-        return balances[_who];
-        // Returns the balance of the specified address (`_who`).
+ 
+        return balances[_who];      
     }
-
+    
+       /*A function that allows users to withdraw a specified amount of Ether.
+         The `nonReentrant` modifier prevents reentrancy attacks.*/
     function withdraw(uint256 _amount) public nonReentrant {
-        // A function that allows users to withdraw a specified amount of Ether.
-        // The `nonReentrant` modifier prevents reentrancy attacks.
 
-        require(balances[msg.sender] >= _amount, "Insufficient balance");
-        // Ensures the sender has enough balance to withdraw the specified amount.
+        require(balances[msg.sender] >= _amount, "Insufficient balance");// Ensures the sender has enough balance to withdraw the specified amount.
 
         balances[msg.sender] -= _amount;
         // Deducts the withdrawn amount from the sender's balance.
